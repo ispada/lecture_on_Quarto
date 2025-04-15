@@ -1,0 +1,184 @@
+---
+title: "Lecture on Quarto"
+subtitle: "Introduction"
+institute: "Introduzione alla Data Science per Ingegneria <br> Corso di Laurea Triennale di Ingegneria Gestionale <br> Univeristà di Pisa"
+author: "Irene Spada"
+date: "15 March 2025"
+format:
+  pdf:
+    documentclass: report
+editor: visual
+toc: true
+---
+
+## Preliminary Instruction
+
+Please complete the following steps prior to setup your PC.
+
+-   Download and install the latest versions of R, RStudio, and Quarto:
+
+    -   R `4.2` or above: [https://cran.r-project.org](https://cran.r-project.org/)
+
+    -   RStudio `2023.03.1+446` or above: <https://posit.co/download/rstudio-desktop>
+
+    -   Quarto `1.3.354` or above: <https://quarto.org/docs/get-started>
+
+-   Install the following packages:
+
+```{r}
+
+pkg_list <- c(   "tidyverse", "gt", "ggthemes", "palmerpenguins", "quarto", "here" ) install.packages(pkg_list)
+
+```
+
+-   Download `exercises.zip` at <https://mine.quarto.pub/quarto-monash/exercises.zip> and unzip it on your Desktop or somewhere you can easily locate on your computer. Then, double click on `exercises.Rproj` to open the RStudio Project.
+
+## Credits
+
+This lecture is based on the following materials:
+
+-   <https://mine.quarto.pub/cincinnati-asa/2-documents-slides/2-documents-slides.html#/title-slide>
+
+-   <https://mine.quarto.pub/quarto-monash/1-hello-quarto/>
+
+# What is Quarto?
+
+## Quarto ...
+
+-   is a new, open-source, scientific, and technical publishing system
+-   aims to make the process of creating and collaborating dramatically better
+-   enables you to weave together content and executable code into a finished document.
+-   To learn more about Quarto see <https://quarto.org>.
+
+![Artwork from "Hello, Quarto" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst.](images/horst_quarto_schematic.png){alt="Artwork from \"Hello, Quarto\" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst." fig-alt="A schematic representing the multi-language input (e.g. Python, R, Observable, Julia) and multi-format output (e.g. PDF, html, Word documents, and more) versatility of Quarto." fig-align="center"}
+
+With Quarto you can weave together narrative text and code to produce elegantly formatted output as documents, web pages, blog posts, books and more.
+
+*Quarto is just like R Markdown*, but there's more to it... Quarto **unifies** + **extends** the R Markdown ecosystem
+
+::: incremental
+-   Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+-   More accessible defaults as well as better support for accessibility
+-   Guardrails, particularly helpful for new learners: YAML completion, informative syntax errors, etc.
+-   Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.
+:::
+
+# 🦾Your Turn
+
+::: task
+Open `hello-penguins.qmd` in RStudio and with the visual editor.
+
+Render the document. Update your name and re-render. Inspect components of the document and make one more update and re-render.
+
+Compare notes with neighbors about updates you've made and note any aspects of the document that are not clear after the tour and your first interaction with it.
+:::
+
+# Navigating within RStudio
+
+## Revisit: What is Quarto?
+
+Quarto is a command line interface (CLI) that renders plain text formats (`.qmd`, `.rmd`, `.md`) OR mixed formats (`.ipynb`/Jupyter notebook) into static PDF/Word/HTML reports, books, websites, presentations and more.
+
+You can **write** in two modes: visual (on the left) and source (on the right).
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-source-visual.png){.fragment fig-alt="A screenshot of a Quarto document interface inside RStudio" fig-align="center" width="500"}
+
+## Quarto workflow
+
+Writing is part of the workflow, but the main step is **rendering**.
+
+Rendering a Quarto file in RStudio via the Render button calls `quarto render` in a **background job**, preventing Quarto rendering from cluttering up the R console, and gives you and easy way to stop:
+
+![](images/background-job.png){fig-align="center" width="500"}
+
+## Rendering in various ways and formats
+
+1.  Option 1: In RStudio as a background job, and preview the output in the viewer panel or in browser.
+
+![](https://quarto.org/docs/tools/images/rstudio-preview.png){.fragment fig-alt="A screenshot of a Quarto document rendered inside RStudio" fig-align="center" width="500"}
+
+2.  Option 2: In the Terminal via `quarto render`:
+
+```{bash} #| eval: false #| echo: true  quarto render document.qmd # defaults to html quarto render document.qmd --to pdf quarto render document.qmd --to docx}
+```
+
+3.  Option 3: In the R console, via the `quarto` R package:
+
+```{r} #| eval: false #| echo: true  library(quarto)  quarto_render("document.qmd") # defaults to html quarto_render("document.qmd", output_format = "pdf")}
+```
+
+> Quarto comes **“batteries included”** straight out of the box
+>
+> -   HTML reports and websites
+>
+> -   PDF reports
+>
+> -   MS Office (Word, Powerpoint)
+>
+> -   Presentations (Powerpoint, Beamer, `revealjs`)
+
+## Many Quarto formats {.smaller}
+
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Feature         | R Markdown                                                                                           | Quarto                                                                         |
++=================+======================================================================================================+================================================================================+
+| Basic Formats   | [html_document](https://pkgs.rstudio.com/rmarkdown/reference/html_document.html)                     | [html](https://quarto.org/docs/output-formats/html-basics.html)                |
+|                 |                                                                                                      |                                                                                |
+|                 | [pdf_document](https://pkgs.rstudio.com/rmarkdown/reference/pdf_document.html)                       | [pdf](https://quarto.org/docs/output-formats/pdf-basics.html)                  |
+|                 |                                                                                                      |                                                                                |
+|                 | [word_document](https://pkgs.rstudio.com/rmarkdown/reference/word_document.html)                     | [docx](https://quarto.org/docs/output-formats/ms-word.html)                    |
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Beamer          | [beamer_presentation](https://pkgs.rstudio.com/rmarkdown/reference/beamer_presentation.html)         | [beamer](https://quarto.org/docs/presentations/beamer.html)                    |
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| PowerPoint      | [powerpoint_presentation](https://pkgs.rstudio.com/rmarkdown/reference/powerpoint_presentation.html) | [pptx](https://quarto.org/docs/presentations/powerpoint.html)                  |
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| HTML Slides     | [xaringan](https://bookdown.org/yihui/rmarkdown/xaringan.html)                                       | [revealjs](https://quarto.org/docs/presentations/revealjs/)                    |
+|                 |                                                                                                      |                                                                                |
+|                 | [ioslides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)                          |                                                                                |
+|                 |                                                                                                      |                                                                                |
+|                 | [revealjs](https://bookdown.org/yihui/rmarkdown/revealjs.html)                                       |                                                                                |
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Advanced Layout | [tufte](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html)                                    | [Quarto Article Layout](https://quarto.org/docs/authoring/article-layout.html) |
+|                 |                                                                                                      |                                                                                |
+|                 | [distill](https://rstudio.github.io/distill/figures.html)                                            |                                                                                |
++-----------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+
+## Many Quarto formats {.smaller}
+
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Feature          | R Markdown                                                                   | Quarto                                                                      |
++==================+==============================================================================+=============================================================================+
+| Cross References | [html_document2](https://bookdown.org/yihui/bookdown/a-single-document.html) | [Quarto Crossrefs](https://quarto.org/docs/authoring/cross-references.html) |
+|                  |                                                                              |                                                                             |
+|                  | [pdf_document2](https://bookdown.org/yihui/bookdown/a-single-document.html)  |                                                                             |
+|                  |                                                                              |                                                                             |
+|                  | [word_document2](https://bookdown.org/yihui/bookdown/a-single-document.html) |                                                                             |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Websites & Blogs | [blogdown](https://pkgs.rstudio.com/blogdown/)                               | [Quarto Websites](https://quarto.org/docs/websites/)                        |
+|                  |                                                                              |                                                                             |
+|                  | [distill](https://pkgs.rstudio.com/distill/)                                 | [Quarto Blogs](https://quarto.org/docs/websites/website-blog.html)          |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Books            | [bookdown](https://pkgs.rstudio.com/bookdown/)                               | [Quarto Books](https://quarto.org/docs/books/)                              |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Interactivity    | [Shiny Documents](https://bookdown.org/yihui/rmarkdown/shiny-documents.html) | [Quarto Interactive Documents](https://quarto.org/docs/interactive/shiny/)  |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Journal Articles | [rticles](https://pkgs.rstudio.com/rticles/)                                 | [Journal Articles](https://quarto.org/docs/journals/index.html)             |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+| Dashboards       | [flexdashboard](https://pkgs.rstudio.com/flexdashboard/)                     | Coming soon!                                                                |
++------------------+------------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+
+# 🦾Your turn
+
+::: task
+In RStudio, go to File \> New File \> Quarto document to create a Quarto document with HTML output. Render the document, which will ask you to give it a name -- you can use `my-first-document.qmd`.
+
+Use the visual editor for the next steps.
+
+-   Add a title and your name as the author.
+
+-   Create two sections, one with fact you want to learn and your favorite thing about R.
+
+-   **Stretch goal:**
+
+    -   Add a Table of Contents (hint: `toc`).
+:::
