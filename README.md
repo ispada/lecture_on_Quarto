@@ -28,8 +28,9 @@ Clone this repository or download the files and open the .Rproj file in RStudio.
 Learn the basics of Quarto and follow the instruction to render the document and experiment with the code and markdown elements.
 
 ## 📦 Materials
-- lecture.qmd: Report on introduction
-- Documents.qmd: RevealJS presentation slides on documents creation
+- Lecture.qmd: .qdm file for producing a report on introduction on Quarto with instruction for exercises.
+- Documents.qmd: .qdm file for producing a RevealJS presentation slides on documents creation.
+- images: folder with images used in the report and in the slides
 
 ## 🙏 Credits
 Based on original teaching materials by:
