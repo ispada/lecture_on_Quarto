@@ -1,7 +1,8 @@
 # Lecture on Quarto - Scripts and materials for an introductory lecture on Quarto using R.
 
 # Introduction to Quarto with R
-This repository contains lecture materials and example scripts for an introductory session on **Quarto** using **R**. The session is part of the course *Introduction to Data Science for Engineering*, Bachelor’s Degree in Management Engineering at the **University of Pisa**.
+This repository contains lecture materials and example scripts for an introductory session on **Quarto** using **R**. 
+The session is part of the course *Introduction to Data Science for Engineering*, Bachelor’s Degree in Management Engineering at the **University of Pisa**.
 
 ## 📚 About the Lecture
 The lecture introduces key concepts in authoring documents with Quarto, a modern scientific and technical publishing system that integrates code and text into elegant, reproducible outputs such as HTML pages, PDFs, and slides. Topics covered include:
